@@ -83,15 +83,6 @@ sudo supervisorctl restart tape-to-tape
 
 ## Step 3: Install the scoreboard
 
-**Pi Zero 2 W only:** raise swap first, or the install can run out of memory:
-
-```bash
-sudo sed -i 's/^CONF_SWAPSIZE=.*/CONF_SWAPSIZE=1024/' /etc/dphys-swapfile
-sudo systemctl restart dphys-swapfile
-```
-
-Then:
-
 ```bash
 cd ~
 gh repo clone Tape-to-Tape-IoT/nhl-led-scoreboard-v2
