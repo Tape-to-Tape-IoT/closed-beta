@@ -1,5 +1,10 @@
 # Tape to tape and NHL LED Scoreboard v2 closed beta
 
+# Project Overview
+
+A lot of things have changed and some things are still missing. Please
+read [PROJECT_OVERVIEW.md](PROJECT_OVERVIEW.md) to know more.
+
 ## What you're testing
 
 Two programs that run together on one Raspberry Pi:
