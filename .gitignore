@@ -218,3 +218,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Maintainer notes: beta invite commands
+INVITES.md
+invite.sh
