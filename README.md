@@ -5,6 +5,12 @@
 A lot of things have changed and some things are still missing. Please
 read [PROJECT_OVERVIEW.md](PROJECT_OVERVIEW.md) to know more.
 
+# What I'm working on
+- Add Goal details scene
+- Add Penalty scene
+- Add Penalty details scene
+- move scene configs into the config folder and create a default and user config for each of them.
+
 ## What you're testing
 
 Two programs that run together on one Raspberry Pi:
