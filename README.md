@@ -47,7 +47,7 @@ uname -m                                # must say aarch64
 ## Step 1: Sign in to GitHub
 
 ```bash
-sudo apt update && sudo apt install -y gh
+sudo apt update && sudo apt install -y git gh
 gh auth login
 ```
 
@@ -162,6 +162,7 @@ You can also manage both at `http://<pi-address>:9001`. It has no password, so a
 
 |Problem|Fix|
 |-|-|
+|`unable to find git executable in PATH`|Run `sudo apt install -y git`, then `gh auth login` again.|
 |`repository not found`|Accept the invite for that repo. Check `gh auth status` shows the right account.|
 |`destination path ... already exists`|You already cloned it. `cd` into it and run `git pull`.|
 |`glibc ... is too old`|You're on Bookworm. Re-image with Trixie 64-bit.|
