@@ -89,7 +89,7 @@ Restart the hub and check it:
 
 ```bash
 sudo supervisorctl restart tape-to-tape
-.venv/bin/python ping_hub.py   # should print ✅ Hub is ONLINE
+cd ~/tape-to-tape && .venv/bin/python ping_hub.py   # should print ✅ Hub is ONLINE
 ```
 
 ## Step 3: Install the scoreboard
