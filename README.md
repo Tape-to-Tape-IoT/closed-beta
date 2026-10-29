@@ -11,8 +11,8 @@ read [PROJECT_OVERVIEW.md](PROJECT_OVERVIEW.md) to know more.
 
 # What I'm working on
 - Add Powerplay scene
-- Rework the pregame scoreboard scene across all sizes
-- Make every scene's fonts and font sizes configurable in the scene config
+- Documentation
+- Configuration web app
 
 ## What you're testing
 
