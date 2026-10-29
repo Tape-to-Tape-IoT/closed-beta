@@ -5,11 +5,14 @@
 A lot of things have changed and some things are still missing. Please
 read [PROJECT_OVERVIEW.md](PROJECT_OVERVIEW.md) to know more.
 
+# Latest update
+
+**October 29, 2026:** goal and penalty details cards, and the scoreboard's config moved. Read [UPDATES.md](UPDATES.md) before you update.
+
 # What I'm working on
-- Add Goal details scene
-- Add Penalty scene
-- Add Penalty details scene
-- move scene configs into the config folder and create a default and user config for each of them.
+- Add Powerplay scene
+- Rework the pregame scoreboard scene across all sizes
+- Make every scene's fonts and font sizes configurable in the scene config
 
 ## What you're testing
 
@@ -115,7 +118,7 @@ sudo reboot
 Skip this if you have a 128x64 panel and want a 12-hour clock. Otherwise, from `~/nhl-led-scoreboard-v2`:
 
 ```bash
-nano config/user.toml
+nano config/app/user.toml
 ```
 
 * **Another panel size:** uncomment `width` and `height` under `[display]` and set them.
@@ -129,6 +132,8 @@ nano config/user.toml
 There's no hub connection to set. The scoreboard finds the hub's Valkey on this Pi by itself.
 
 If the panel looks wrong (swapped colours, blank, flicker), the top of this file lists what to change.
+
+Scene tweaks (wording, colours, timing) go in `config/scene/user.toml`. See [Scenes](PROJECT_OVERVIEW.md#scenes).
 
 ## Step 5: Test it
 
@@ -150,7 +155,7 @@ It asks for `sudo` because the panel driver needs root. Every start plays an int
 The hub and the scoreboard now both start at boot. Useful commands:
 
 ```bash
-sudo supervisorctl restart nhl-led-scoreboard-v2   # after editing the scoreboard's config/user.toml
+sudo supervisorctl restart nhl-led-scoreboard-v2   # after editing the scoreboard's config/app/user.toml or config/scene/user.toml
 sudo supervisorctl restart tape-to-tape            # after editing the hub's config/user.toml
 sudo supervisorctl tail -f nhl-led-scoreboard-v2   # follow the log (or tape-to-tape)
 sudo supervisorctl stop nhl-led-scoreboard-v2      # before running ./run.sh by hand
@@ -169,9 +174,12 @@ You can also manage both at `http://<pi-address>:9001`. It has no password, so a
 |`ImportError: libfontconfig.so.1`, or the browser preview starts instead of the panel|Re-run `./setup_pi.sh`.|
 |`already running under Supervisor`|Run `sudo supervisorctl stop nhl-led-scoreboard-v2` first.|
 |Splash screen never goes away|The hub isn't reachable. `sudo supervisorctl status tape-to-tape` should say `RUNNING`, and `valkey-cli ping` should print `PONG`.|
-|Swapped colours, blank panel, flicker|See the top of the scoreboard's `config/user.toml`.|
+|Swapped colours, blank panel, flicker|See the top of the scoreboard's `config/app/user.toml`.|
+|`Your local changes to the following files would be overwritten by merge`|You edited a file the update replaces. See [Updating](#updating).|
 
 ## Updating
+
+Update the hub first. [UPDATES.md](UPDATES.md) lists what changed.
 
 ```bash
 cd ~/tape-to-tape && git pull && ./setup.sh --service
@@ -179,7 +187,16 @@ cd ~/nhl-led-scoreboard-v2 && git pull && ./setup.sh && ./setup_pi.sh
 sudo supervisorctl restart nhl-led-scoreboard-v2
 ```
 
-Your `config/user.toml` and `.env` files are kept.
+Your `user.toml` and `.env` files are kept.
+
+**If `git pull` says your local changes would be overwritten,** you edited a file the update replaces, like `scenes/scene_config.xl.toml`. Copy what you changed somewhere safe (`git diff` shows it), then undo it and pull again in that repo:
+
+```bash
+git checkout -- .
+git pull
+```
+
+Then run the rest of that repo's line above, and put your changes in your `user.toml` instead (for scene settings, the scoreboard's `config/scene/user.toml`).
 
 ## Feedback
 
